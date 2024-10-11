@@ -27,4 +27,4 @@ a:hover {
 br::after {
     content: "";
     display: block;
-    height: 20px;
+    height: 2px;
