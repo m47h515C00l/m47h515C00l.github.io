@@ -10,70 +10,8 @@
         If you've made it here it means you've reached the end of the maths textbook treasure hunt. Now, for the final clue, follow the link below.
     </p><br>
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Final Clue</a><br>
-    <h1>Textbook Code</h1>
-    <input type="text" id="secretCode" placeholder="Enter the code" />
-    <button id="submitBtn">Submit</button>
-    <h3>Winners: <span id="counterDisplay">0</span></h3>
 
 </body>
-    <script>
-        // The secret code to match
-        const SECRET_CODE = "7R3A5UR3HUN7";
-
-        // Initialize localStorage values if they don't exist
-        if (!localStorage.getItem('counter')) {
-            localStorage.setItem('counter', 0);
-        }
-
-        if (!localStorage.getItem('ipAddresses')) {
-            localStorage.setItem('ipAddresses', JSON.stringify([]));
-        }
-
-        const counterDisplay = document.getElementById('counterDisplay');
-        const secretCodeInput = document.getElementById('secretCode');
-        const submitBtn = document.getElementById('submitBtn');
-
-        // Function to update the counter display
-        function updateCounterDisplay() {
-            const counter = localStorage.getItem('counter');
-            counterDisplay.textContent = counter;
-        }
-
-        async function getUserIP() {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        return data.ip;
-}
-
-        submitBtn.addEventListener('click', () => {
-            const enteredCode = secretCodeInput.value;
-            const ipAddress = getUserIP();
-            const ipAddresses = JSON.parse(localStorage.getItem('ipAddresses'));
-
-            // Check if the entered code matches and the IP address is not already in localStorage
-            if (enteredCode === SECRET_CODE && !ipAddresses.includes(ipAddress)) {
-                ipAddresses.push(ipAddress);
-                localStorage.setItem('ipAddresses', JSON.stringify(ipAddresses));
-
-                // Increment and update the counter
-                const currentCounter = parseInt(localStorage.getItem('counter'), 10);
-                localStorage.setItem('counter', currentCounter + 1);
-                updateCounterDisplay();
-                
-                alert('Access granted! Your IP address has been added.');
-            } else if (enteredCode !== SECRET_CODE) {
-                alert('Incorrect code. Please try again.');
-            } else {
-                alert('Your IP address is already on the list.');
-            }
-
-            // Clear the input field after submission
-            secretCodeInput.value = '';
-        });
-
-        // Initialize counter display on page load
-        updateCounterDisplay();
-    </script>
 </html>
 
 
