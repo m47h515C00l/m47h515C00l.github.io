@@ -23,8 +23,3 @@ a {
 a:hover {
     color: darkred; /* Slightly darker on hover */
 }
-
-br::after {
-    content: "";
-    display: block;
-    height: 1px;
